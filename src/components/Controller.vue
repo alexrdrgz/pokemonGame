@@ -1,22 +1,36 @@
 <template>
-  <div>
-      <h1>Controller</h1>
+  <div class="ControllerContainer">
+      <h1 class="title">Controller</h1>
       <div class="buttonContainer">
-        <p><img id="upArrow" src="../assets/arrowKey.png"/> Charzard</p>
-        <p><img id="rightArrow" src="../assets/arrowKey.png"/> Bulbasaur</p>
-        <p><img id="downArrow" src="../assets/arrowKey.png"/> Ivysaur</p>
-        <p><img id="leftArrow" src="../assets/arrowKey.png"/> Pikachu</p>
+        <p class="option"><img id="upArrow" src="../assets/arrowKey.png"/> {{options[0]}}</p>
+        <p class="option"><img id="rightArrow" src="../assets/arrowKey.png"/>{{options[1]}}</p>
+        <p class="option"><img id="downArrow" src="../assets/arrowKey.png"/> {{options[2]}}</p>
+        <p class="option"><img id="leftArrow" src="../assets/arrowKey.png"/> {{options[3]}}</p>
       </div>
   </div> 
 </template>
 
 <script>
 export default {
+  props: {
+    options: Array
+  },
 
 }
 </script>
 
 <style>
+  
+  .buttonContainer{
+    padding: 5%;
+  }
+  .title{
+    text-align: center;
+  }
+  .option{
+    font-size: 20px;
+    
+  }
   #upArrow{
     width: 15px;
     margin-right: 5px;
