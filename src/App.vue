@@ -1,17 +1,24 @@
+/* eslint-disable no-unused-vars */
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="gameContent">
+      <Pokemon id="Pokemon"/>
+      
+      <Controller id="Controller"/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Pokemon from './components/Pokemon.vue'
+import Controller from './components/Controller'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Pokemon,
+    Controller
   }
 }
 </script>
@@ -24,5 +31,27 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+ 
 }
+.gameContent{
+  padding: 6%;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#Controller{
+  border: solid 3px #FBD743;
+  background: #5EB9FF;
+  width: 100%;
+  height: 600px;
+}
+#Pokemon{
+  border: solid 3px #FBD743;
+  background: white;
+  width: 100%;
+  height: 600px;
+}
+
+
 </style>
