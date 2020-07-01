@@ -1,12 +1,10 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-vars */
 
 <template>
   <div>
       <div>
           <h1>Pokemon</h1>
-          <p @click="ReturnRandomPokemon" class="pokeButton">Generate Random Pokemon</p>
+          <p @click="SetPokemon" class="pokeButton">Generate Random Pokemon</p>
           <img :src=imgURL>
       </div>
       <div></div>
@@ -41,7 +39,6 @@ export default {
     pokeUrl: 'https://pokeapi.co/api/v2/pokemon/',
     imgURL:'',
     CorrectAnswer: '',
-
   }
   },
 
@@ -63,7 +60,7 @@ export default {
         }) 
       },
 
-    ReturnRandomPokemon: function(){
+    SetPokemon: function(){
 
         var id = this.RandomNumber();
         this.imgURL = 'https://pokeres.bastionbot.org/images/pokemon/'+ id + '.png';
@@ -71,14 +68,9 @@ export default {
 
     }
     },
-    // API Call To Get Pokemon Image
     
-
-
+    
 };
-
-
-
 
 </script>
 
