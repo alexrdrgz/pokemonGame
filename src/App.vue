@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 <template>
   <div id="app">
-    <p class="pokeButton" @click="SetPokemon">Generate Random Pokemon</p>
+    <p class="pokeButton" @click="RunRound">Generate Random Pokemon</p>
     <p class="pokeButton">Submit</p>
     <div class="gameContent">
-      <Pokemon id="Pokemon" :imgURL="imgUrl" />
-      <Controller id="Controller" :options="choices" />
+      <Pokemon id="Pokemon" v-bind:imgURL="imgUrl" />
+      <Controller id="Controller" v-bind:options="choices" />
     </div>
   </div>
 </template>
@@ -24,14 +24,13 @@ export default {
    score: Number,
    selected: String,
    imageURL:String
-
  },
  data: function () {
   return {
     imgUrl:'',
-    choices: ['hello','test','check','yee'],
-    correctAnswer: 'pikachu',
-    name: ''
+    choices: [],
+    correctAnswer: '',
+    name: '',
   }
   },
   components: {
@@ -39,38 +38,48 @@ export default {
     Controller
   },
   methods: {
+    RunRound: function(){
+      this.choices = [];
+      this.SetPokemon();
+      this.SetOptions();
+    },
     // // Random Number Generator Used To Pick ID of Pokemon
     RandomNumber: function(){
         return (Math.floor(Math.random() * (150 - 1) + 1)).toString(10);
     },
     // API Call To Get Pokemon Data 
     ReturnPokemonName: function(id) {
-        
-        axios.get('https://pokeapi.co/api/v2/pokemon/' + id + '/' ,{})
-        .then((response) => {
-         this.name = response.data.name;
-        }) 
-        return this.name;
-      },
-    SetCorrectAnswer: function(id){
-      console.log(this.ReturnPokemonName(id));
-      this.correctAnswer = this.ReturnPokemonName(id);
-      console.log(this.correctAnswer + 'hey');
-      return 'hello';
+        return axios.get('https://pokeapi.co/api/v2/pokemon/' + id + '/')
+        .then(response => {
+          return response.data.name;
+        })
     },
-    //Sets Correct Answer To The Pokemon Name
     SetPokemon: function(){
         var id = this.RandomNumber();
         this.imgUrl = 'https://pokeres.bastionbot.org/images/pokemon/'+ id + '.png';
-        return this.SetCorrectAnswer(id);
+        this.SetCorrectAnswer(id);
     },
-    checkAnswer: function(){
-      if(this.selected === this.correctAnswer){
-        return true;
-      } else {
-        return false;
+    //Sets var correctAnswer To The Pokemon Name
+    SetCorrectAnswer: function(id){
+      this.ReturnPokemonName(id).then(data => {
+           this.correctAnswer = data;
+           this.choices.splice(0, 1, data);
+        })
+    },
+    SetOptions: function(){
+      for (var i = 1; i < 4; i++){
+        this.ReturnPokemonName(this.RandomNumber()).then(data =>{
+            console.log(i + "test");
+            this.choices.splice(i , 1 , data);  
+            console.log(this.choices[i]);
+        }) 
       }
+
+    },
+    RandomizeOptions: function(){
+
     }
+
 
     }
 }
@@ -90,6 +99,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 #Controller{

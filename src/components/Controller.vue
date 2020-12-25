@@ -15,12 +15,10 @@ export default {
   props: {
     options: Array
   },
-
 }
 </script>
 
 <style>
-  
   .buttonContainer{
     padding: 5%;
   }
